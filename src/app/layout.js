@@ -5,6 +5,7 @@ import Ticker from '@/app/components/Ticker';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 
+
 export const metadata = { 
   title: 'বাজার দর | BazarDor', 
   description: 'প্রয়োজনীয় পণ্যের দাম এক নজরে' 
