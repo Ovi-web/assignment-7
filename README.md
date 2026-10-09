@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# বাজার দর (BazarDor) 🛒
 
-## Getting Started
+A modern, responsive, and dynamic web application designed to track and compare daily commodity prices across different local markets at a glance. Users can monitor price fluctuations, view market trends, filter by categories, and check detailed pricing summaries.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🚀 Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js (App Router):** Server-side rendering, dynamic routing (`/product/[slug]`), and optimized page navigation.
+- **React:** Component architecture, declarative state management, and reusable UI components.
+- **Tailwind CSS & DaisyUI:** Mobile-first, fully responsive design and utility-first layout styling across all screen sizes.
+- **BetterAuth:** Robust authentication handling email/password, social logins (Google, GitHub), and session management.
+- **React Hot Toast:** Interactive, non-blocking toast notifications for user authentication and protected route alerts.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ 5 Key Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Infinite Price Ticker & Category Navigation**  
+   An animated marquee ticker strip positioned right below the header showcasing continuous real-time price updates and fluctuation percentages, paired with intuitive category filtering tabs.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Daily Market Movers (Top Risers & Fallers)**  
+   Dedicated home sections highlighting the top 6 price risers (আজ দাম বেড়েছে ▲) and top 6 price fallers (আজ দাম কমেছে ▼) calculated dynamically to give immediate market insights.
 
-## Deploy on Vercel
+3. **Bengali Numeral Aware Sorting**  
+   Category page features sorting controls (default, low-to-high, high-to-low) with custom parsing logic that properly sorts Bengali numeral currency values rather than simple string comparison.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Protected Detailed Analytics & Market Breakdown**  
+   Secured product detail view (`/product/[slug]`) requiring user authentication. It features a complete price breakdown (min, max, average) alongside market-specific rates from various local bazaars.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Integrated Authentication & Profile Management**  
+   Seamless sign-in and sign-up flows supporting credentials and social authentication (Google/GitHub) via BetterAuth, along with a dedicated profile update interface to modify account information.
+
+---
