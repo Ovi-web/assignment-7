@@ -1,11 +1,14 @@
 "use client";
-
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Hero() {
   const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-  const todayBn = new Date().toLocaleDateString('bn-BD', dateOptions);
+  const [todayBn, setTodayBn] = useState('');
+ useEffect(() => {
+  setTodayBn(new Date().toLocaleDateString('bn-BD', dateOptions));
+}, []);
 
   return (
     <div className="py-6">

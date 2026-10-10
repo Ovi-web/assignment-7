@@ -32,7 +32,15 @@ export default function SignIn() {
   };
 
   const handleSocial = async (provider) => {
-    await authClient.signIn.social({ provider });
+    try {
+      await authClient.signIn.social({
+        provider,
+        callbackURL: '/',
+      });
+      toast.success("লগইন সফল হয়েছে!");
+    } catch (err) {
+      toast.error(err?.message || "লগইন ব্যর্থ হয়েছে!");
+    }
   };
 
   return (

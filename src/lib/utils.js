@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.abcz.workers.dev/api/bazardor';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://openapi.programming-hero.com/api/bazardor';
 
 export const fetchAPI = async (endpoint) => {
   try {
