@@ -1,7 +1,7 @@
 import ProductCard from '@/app/components/ProductCard';
 import { fetchAPI, engToBnNum } from '@/lib/utils';
 import Link from 'next/link';
-
+export const instant = false;
 export default async function CategoryPage({ params, searchParams }) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
