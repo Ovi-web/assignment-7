@@ -121,7 +121,7 @@ export default async function CategoryPage({ params, searchParams }) {
             </div>
           ) : (
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
-              <p className="text-gray-500">এই ক্যাটাগরিতে কোনো পণ্য পাওয়া যায়নি।</p>
+              <p className="text-gray-500">এই ক্যাটাগরিতে কোনো পণ্য পাওয়া যায়নি।</p>
             </div>
           )}
         </div>
