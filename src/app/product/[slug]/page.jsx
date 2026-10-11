@@ -126,7 +126,7 @@ function ProductDetailsContent() {
     <div className="min-h-screen bg-[#F4F5F4] py-4 sm:py-6 lg:py-8">
       <div className="max-w-6xl mx-auto px-4 space-y-5 sm:space-y-6">
         
-        {/* Breadcrumb */}
+
         <div className="text-xs sm:text-sm text-gray-500 flex flex-wrap items-center gap-1.5 sm:gap-2">
           <Link href="/" className="hover:text-[#0F8A43] transition-colors">হোম</Link>
           <span className="mt-0.5">›</span>
@@ -135,7 +135,6 @@ function ProductDetailsContent() {
           <span className="text-gray-900 font-medium">{product.nameBn || product.name}</span>
         </div>
 
-        {/* Product Top Card */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-center gap-4 sm:gap-5">
             <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-50 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl border border-gray-100 shrink-0 shadow-inner">
@@ -166,7 +165,6 @@ function ProductDetailsContent() {
           </div>
         </div>
 
-        {/* Price Summary */}
         <div>
           <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">দামের সারসংক্ষেপ</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
@@ -199,7 +197,6 @@ function ProductDetailsContent() {
           </div>
         </div>
 
-        {/* Table */}
         {markets.length > 0 && (
           <div className="mt-6 sm:mt-8">
             <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">বাজারভিত্তিক আজকের দাম</h2>
