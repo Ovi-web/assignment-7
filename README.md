@@ -1,3 +1,7 @@
+
+## ✨ Project Overview
+![Website Screenshot](https://raw.githubusercontent.com/Ovi-web/assignment-7/main/public/screencapture-assignment-7-bazarapp-vercel-app-2026-10-11-21_14_25.png)
+
 # বাজার দর (BazarDor) 🛒
 
 A modern, responsive, and dynamic web application designed to track and compare daily commodity prices across different local markets at a glance. Users can monitor price fluctuations, view market trends, filter by categories, and check detailed pricing summaries.
