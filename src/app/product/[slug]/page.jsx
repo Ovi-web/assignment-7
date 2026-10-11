@@ -1,13 +1,50 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { fetchAPI, engToBnNum } from '@/lib/utils';
 import Link from 'next/link';
 import { authClient } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
 
-export default function ProductDetailsPage() {
+function ProductSkeleton() {
+  return (
+    <div className="min-h-screen bg-[#F4F5F4] py-4 sm:py-6">
+      <div className="max-w-6xl mx-auto px-4 space-y-4 sm:space-y-6">
+        <div className="skeleton h-4 w-40 sm:w-48"></div>
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+          <div className="flex items-center gap-4 sm:gap-5 w-full md:w-auto">
+            <div className="skeleton w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shrink-0"></div>
+            <div className="space-y-2 sm:space-y-3 w-full">
+              <div className="skeleton h-5 sm:h-6 w-32 sm:w-40"></div>
+              <div className="skeleton h-3 sm:h-4 w-24 sm:w-32"></div>
+              <div className="skeleton h-3 sm:h-4 w-36 sm:w-48"></div>
+            </div>
+          </div>
+          <div className="bg-gray-50 rounded-xl p-4 w-full md:min-w-[140px] flex flex-col items-center justify-center border border-gray-100 space-y-2">
+            <div className="skeleton h-3 w-16"></div>
+            <div className="skeleton h-8 w-20"></div>
+            <div className="skeleton h-3 w-16"></div>
+          </div>
+        </div>
+        <div>
+          <div className="skeleton h-5 sm:h-6 w-32 mb-3 sm:mb-4"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            <div className="skeleton h-24 w-full rounded-xl"></div>
+            <div className="skeleton h-24 w-full rounded-xl"></div>
+            <div className="skeleton h-24 w-full rounded-xl"></div>
+          </div>
+        </div>
+        <div>
+          <div className="skeleton h-5 sm:h-6 w-40 mb-3 sm:mb-4"></div>
+          <div className="skeleton h-[400px] w-full rounded-xl"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProductDetailsContent() {
   const params = useParams();
   const router = useRouter();
   const slug = params?.slug;
@@ -43,40 +80,7 @@ export default function ProductDetailsPage() {
   }, [slug, session]);
 
   if (isPending || !session || isLoading) {
-    return (
-      <div className="min-h-screen bg-[#F4F5F4] py-4 sm:py-6">
-        <div className="max-w-6xl mx-auto px-4 space-y-4 sm:space-y-6">
-          <div className="skeleton h-4 w-40 sm:w-48"></div>
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
-            <div className="flex items-center gap-4 sm:gap-5 w-full md:w-auto">
-              <div className="skeleton w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shrink-0"></div>
-              <div className="space-y-2 sm:space-y-3 w-full">
-                <div className="skeleton h-5 sm:h-6 w-32 sm:w-40"></div>
-                <div className="skeleton h-3 sm:h-4 w-24 sm:w-32"></div>
-                <div className="skeleton h-3 sm:h-4 w-36 sm:w-48"></div>
-              </div>
-            </div>
-            <div className="bg-gray-50 rounded-xl p-4 w-full md:min-w-[140px] flex flex-col items-center justify-center border border-gray-100 space-y-2">
-              <div className="skeleton h-3 w-16"></div>
-              <div className="skeleton h-8 w-20"></div>
-              <div className="skeleton h-3 w-16"></div>
-            </div>
-          </div>
-          <div>
-            <div className="skeleton h-5 sm:h-6 w-32 mb-3 sm:mb-4"></div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              <div className="skeleton h-24 w-full rounded-xl"></div>
-              <div className="skeleton h-24 w-full rounded-xl"></div>
-              <div className="skeleton h-24 w-full rounded-xl"></div>
-            </div>
-          </div>
-          <div>
-            <div className="skeleton h-5 sm:h-6 w-40 mb-3 sm:mb-4"></div>
-            <div className="skeleton h-[400px] w-full rounded-xl"></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <ProductSkeleton />;
   }
 
   if (!product) {
@@ -92,14 +96,14 @@ export default function ProductDetailsPage() {
   const isDown = product.change?.dir === 'down';
   const price = product.today || 0;
   const yesterdayPrice = product.yesterday || price;
-  
+
   const diffAmount = Math.abs(price - yesterdayPrice);
   const changePct = product.change?.pct || 0;
 
   const unitMap = { 'kg': 'কেজি', 'litre': 'লিটার', 'dozen': 'ডজন', 'piece': 'পিস' };
   const unit = unitMap[product.unit] || 'কেজি';
   const categoryName = product.categoryNameBn || product.category || "চাল";
-  
+
   const markets = Array.isArray(product.markets) ? product.markets : [];
 
   let calculatedMin = price;
@@ -122,7 +126,7 @@ export default function ProductDetailsPage() {
     <div className="min-h-screen bg-[#F4F5F4] py-4 sm:py-6 lg:py-8">
       <div className="max-w-6xl mx-auto px-4 space-y-5 sm:space-y-6">
         
-        {/* Breadcrumb - Responsive wrap */}
+        {/* Breadcrumb */}
         <div className="text-xs sm:text-sm text-gray-500 flex flex-wrap items-center gap-1.5 sm:gap-2">
           <Link href="/" className="hover:text-[#0F8A43] transition-colors">হোম</Link>
           <span className="mt-0.5">›</span>
@@ -131,7 +135,7 @@ export default function ProductDetailsPage() {
           <span className="text-gray-900 font-medium">{product.nameBn || product.name}</span>
         </div>
 
-        {/* Product Top Card - Flex col on mobile, row on MD (Tab/Desktop) */}
+        {/* Product Top Card */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6">
           <div className="flex items-center gap-4 sm:gap-5">
             <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-50 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl border border-gray-100 shrink-0 shadow-inner">
@@ -142,7 +146,7 @@ export default function ProductDetailsPage() {
               <p className="text-xs sm:text-sm text-gray-500 mb-1.5 sm:mb-2">প্রতি {unit} · {categoryName}</p>
               
               <p className="text-xs sm:text-sm font-medium text-gray-700">
-                গতকালের তুলনায় আজ দাম <span className={isUp ? 'text-red-600' : isDown ? 'text-[#0F8A43]' : 'text-gray-600'}>
+                গতকালকের তুলনায় আজ দাম <span className={isUp ? 'text-red-600' : isDown ? 'text-[#0F8A43]' : 'text-gray-600'}>
                   {isUp ? 'বেড়েছে' : isDown ? 'কমেছে' : 'অপরিবর্তিত'}
                 </span> {engToBnNum(diffAmount)} টাকা
               </p>
@@ -162,7 +166,7 @@ export default function ProductDetailsPage() {
           </div>
         </div>
 
-        {/* Price Summary - 1 col (Mobile), 2 col (Tab), 3 col (Desktop) */}
+        {/* Price Summary */}
         <div>
           <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">দামের সারসংক্ষেপ</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
@@ -195,7 +199,7 @@ export default function ProductDetailsPage() {
           </div>
         </div>
 
-        {/* Table - Mobile Scrollable */}
+        {/* Table */}
         {markets.length > 0 && (
           <div className="mt-6 sm:mt-8">
             <h2 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">বাজারভিত্তিক আজকের দাম</h2>
@@ -242,5 +246,13 @@ export default function ProductDetailsPage() {
 
       </div>
     </div>
+  );
+}
+
+export default function ProductDetailsPage() {
+  return (
+    <Suspense fallback={<ProductSkeleton />}>
+      <ProductDetailsContent />
+    </Suspense>
   );
 }
